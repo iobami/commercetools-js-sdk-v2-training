@@ -9,24 +9,24 @@ const {
 const { log } = require("./logger.js");
 
 const customerDraftData = {
-  firstName: "test",
-  lastName: "test",
-  email: "test@test.com",
+  firstName: "Ayobami",
+  lastName: "John",
+  email: "bam@test.com",
   password: "password",
-  key: "test123",
-  countryCode: "DE",
+  key: "ayobami",
+  countryCode: "US",
 };
 
- createCustomer(customerDraftData).then(log).catch(log);
+//  createCustomer(customerDraftData).then(log).catch(log);
 
-// getCustomerByKey('test123').then(log).catch(log);
+// getCustomerByKey('ayobami').then(log).catch(log);
 
-// getCustomerById("a303f0e7-8535-4784-a638-e59f05208355").then(log).catch(log);
+// getCustomerById('eb263cc1-7229-42dd-b863-8c4b8a46b2c9').then(log).catch(log);
 
-// getCustomerByKey('test123')
+// getCustomerByKey('ayobami')
 //   .then(createCustomerToken)
 //   .then(confirmCustomerEmail)
 //   .then(log)
 //   .catch(log);
 
-//assignCustomerToCustomerGroup('test123','indoor-customers').then(log).catch(log);
+assignCustomerToCustomerGroup('ayobami','indoor-customers').then(log).catch(log);
