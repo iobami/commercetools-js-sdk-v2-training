@@ -14,7 +14,7 @@ const customerDraftData = {
   email: "bam@test.com",
   password: "password",
   key: "ayobami",
-  countryCode: "US",
+  countryCode: "DE",
 };
 
 //  createCustomer(customerDraftData).then(log).catch(log);

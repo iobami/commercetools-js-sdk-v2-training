@@ -2,21 +2,21 @@ const states = require("./handson/states");
 const { log } = require("./logger.js");
 
 const orderPackedStateDraft = {
-  key: "ff-order-packed",
+  key: "aa-order-packed",
   type: "OrderState",
   name: {
-    "de": "FF Order Packed ",
-    "en": "FF Order Packed ",
+    "de": "AA Order Packed ",
+    "en": "AA Order Packed ",
   },
   initial: true,
 };
 
 const orderCompletedStateDraft = {
-  key: "ff-order-completed",
+  key: "aa-order-completed",
   type: "OrderState",
   name: {
-    "de": "FF Order Completed ",
-    "en": "FF Order Completed ",
+    "de": "AA Order Completed ",
+    "en": "AA Order Completed ",
   },
   initial: false,
 };
@@ -32,6 +32,6 @@ const createStatesWithTransitions = async () => {
   return orderPackedState;
 };
 
-createStatesWithTransitions().then(log).catch(log)
+// createStatesWithTransitions().then(log).catch(log)
 
-//states.getStateByKey(orderPackedStateDraft.key).then(log).catch(log)
+states.getStateByKey(orderPackedStateDraft.key).then(log).catch(log)

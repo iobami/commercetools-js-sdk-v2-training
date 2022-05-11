@@ -1,12 +1,12 @@
 const checkout = require("./handson/order");
 const { log } = require("./logger.js");
 
-const customerKey = "";
-const cartId = "";
-const orderId = "";
+const customerKey = "ayobami";
+const cartId = "8058b2b0-8856-4ff3-bf30-1ffef0bffa7f";
+const orderId = "77b4f2fb-661f-49cd-9351-8d98fcd2ec88";
 
 const paymentDraft = {
-  key:"payment" + Math.random().toString(36).substr(2, 5),
+  key:"payment" + Math.random().toString(36).substring(2, 5),
   amountPlanned:{
     currencyCode: 'EUR',
     centAmount: 5000
@@ -14,7 +14,7 @@ const paymentDraft = {
 }
 
 // create a cart and update the catId variable
- checkout.createCart(customerKey).then(log).catch(log);
+//  checkout.createCart(customerKey).then(log).catch(log);
 
 // checkout.addLineItemsToCart(cartId,['tulip-seed-box','tulip-seed-sack']).then(log).catch(log);
 
@@ -28,7 +28,7 @@ const paymentDraft = {
 
 // set order state to confirmed and custom workflow state to order packed
 // checkout.setOrderState(orderId, 'Confirmed').then(log).catch(log);
-// checkout.updateOrderCustomState(orderId,"ff-order-packed").then(log).catch(log);
+checkout.updateOrderCustomState(orderId,"aa-order-packed").then(log).catch(log);
 
 const checkoutProcess = async () => {
   let emptyCart = await checkout.createCart(customerKey);
@@ -44,7 +44,7 @@ const checkoutProcess = async () => {
   const payment = await checkout.createPayment(paymentDraft);
   order = await checkout.addPaymentToOrder(order.body.id, payment.body.id);
   order = await checkout.setOrderState(order.body.id, 'Confirmed');
-  order = await checkout.updateOrderCustomState(order.body.id,'ff-order-packed');
+  order = await checkout.updateOrderCustomState(order.body.id,'aa-order-packed');
   if (order) {
     return {
       status: 201,
