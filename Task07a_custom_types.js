@@ -3,10 +3,10 @@ const {log} = require('./logger');
 
 
 const typeDraft = {
-    key:'ff-allowed-to-place-orders',
+    key:'aa-allowed-to-place-orders',
     name:{
-        "de":'ff allowed to place orders',
-        "en":'ff allowed to place orders'
+        "de":'aa allowed to place orders',
+        "en":'aa allowed to place orders'
     },
     description:{
         "de":'allow a customer to place orders',
@@ -27,3 +27,6 @@ const typeDraft = {
 }
 
 // TODO : CREATE the custom type
+apiRoot.types().post({
+    body: typeDraft
+}).execute().then(log).catch(log)

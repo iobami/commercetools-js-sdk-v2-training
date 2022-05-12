@@ -2,7 +2,7 @@ const { simulatePagination } = require("./handson/search");
 const { log } = require("./logger");
 
 
-var perPage = 2, lastPage = false, products =  null, lastId = null, where = null;
+var perPage = 5, lastPage = false, products =  null, lastId = null, where = null;
 
 const getPagedQueryResults = async _ => {
     while (!lastPage){

@@ -3,7 +3,6 @@ const { getCustomerByKey } = require( "./customer.js" );
 
 module.exports.createCart = (customerKey) => {
   return getCustomerByKey(customerKey).then(customer => {
-    console.log(customer.body.addresses, ' customer.body.addresses');
     return apiRoot.carts().post({
       body: {
         customerId: customer.body.id,
@@ -20,7 +19,7 @@ module.exports.createCart = (customerKey) => {
 }
 
 module.exports.createAnonymousCart = () =>
-  apiRoot.withProjectKey({ projectKey })
+  apiRoot
     .carts()
     .post({
       body: {
@@ -30,7 +29,11 @@ module.exports.createAnonymousCart = () =>
     })
     .execute()
 
-module.exports.customerSignIn = (customerDetails) => {}
+module.exports.customerSignIn = (customerDetails) => {
+  return apiRoot.login().post({
+    body: customerDetails
+  }).execute();
+}
 
 module.exports.getCartById = (ID) => {
   return apiRoot.carts().withId({ ID }).get().execute();
@@ -100,7 +103,11 @@ module.exports.updateOrderCustomState = (orderId, customStateKey) =>
     }).execute()
   )
 
-module.exports.createPayment = (paymentDraft) => {}
+module.exports.createPayment = (paymentDraft) => {
+  return apiRoot.payments().post({
+    body: paymentDraft
+  }).execute()
+}
 
 module.exports.setOrderState = (orderId, stateName) =>
   this.getOrderById(orderId).then(order =>
@@ -117,4 +124,20 @@ module.exports.setOrderState = (orderId, stateName) =>
     }).execute()
   )
 
-module.exports.addPaymentToOrder = (orderId, paymentId) => {}
+module.exports.addPaymentToOrder = (orderId, paymentId) => 
+  this.getOrderById(orderId).then(order =>
+    apiRoot.orders().withId({ID: orderId}).post({
+      body: {
+        version: order.body.version,
+        actions: [
+          {
+            action: "addPayment",
+            payment: {
+              typeId: "payment",
+              id: paymentId
+            }
+          }
+        ]
+      }
+    }).execute()
+  )

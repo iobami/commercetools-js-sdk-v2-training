@@ -16,3 +16,6 @@ const extensionDraft = {
 }
 
 // TODO: CREATE the extension
+apiRoot.extensions().post({
+    body: extensionDraft
+}).execute().then(log).catch(log);

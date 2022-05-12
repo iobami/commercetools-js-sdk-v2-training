@@ -28,7 +28,7 @@ const paymentDraft = {
 
 // set order state to confirmed and custom workflow state to order packed
 // checkout.setOrderState(orderId, 'Confirmed').then(log).catch(log);
-checkout.updateOrderCustomState(orderId,"aa-order-packed").then(log).catch(log);
+// checkout.updateOrderCustomState(orderId,"aa-order-packed").then(log).catch(log);
 
 const checkoutProcess = async () => {
   let emptyCart = await checkout.createCart(customerKey);
@@ -52,5 +52,10 @@ const checkoutProcess = async () => {
     };
   }
 };
+
+// {
+//   "status": 201,
+//   "message": "order created: 7cecc33f-ec7a-4089-b824-9d528427f226"
+// }
 
 // checkoutProcess().then(log).catch(log);

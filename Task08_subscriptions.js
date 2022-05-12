@@ -21,3 +21,6 @@ const subscriptionDraft = {
 }
 
 // TODO : CREATE the subscription
+apiRoot.subscriptions().post({
+    body: subscriptionDraft
+}).execute().then(log).catch(log);

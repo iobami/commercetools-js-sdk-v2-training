@@ -1,7 +1,7 @@
 const checkout = require("./handson/order");
 const { log } = require("./logger.js");
 
-const customerKey = "";
+const customerKey = "ayobami";
 
 const mergingProcessTest = async () => {
   let anonymousCart = await checkout.createAnonymousCart();
@@ -16,10 +16,10 @@ const mergingProcessTest = async () => {
   log("Customer Cart: "+ customerCart.body.id);
 
   const customerDetails = {
-    email: "test@test.com",
+    email: "bam@test.com",
     password: "password",
     anonymousCartId: anonymousCart.body.id,
-    anonymousCartSignInMode: "MergeWithExistingCustomerCart", // try switching to UseAsNewActiveCustomerCart
+    anonymousCartSignInMode: "UseAsNewActiveCustomerCart", // try switching to UseAsNewActiveCustomerCart
   };
   let result = await checkout.customerSignIn(customerDetails);
   return result.body.cart;

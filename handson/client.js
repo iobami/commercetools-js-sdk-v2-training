@@ -78,13 +78,69 @@ const getImportClient = () => {
 };
 
 const getStoreClient = () => {
+  const projectKey = process.env.BERLIN_PROJECT_KEY;
+  const clientSecret = process.env.BERLIN_CLIENT_SECRET;
+  const clientId = process.env.BERLIN_CLIENT_ID;
+  const oauthHost = process.env.BERLIN_AUTH_URL;
+  const host = process.env.BERLIN_API_URL;
 
+  const authMiddleWare = createAuthForClientCredentialsFlow({
+    host: oauthHost,
+    projectKey,
+    credentials: {
+      clientId,
+      clientSecret
+    },
+    fetch
+  });
+
+  const httpMiddleWare = createHttpClient({
+    host,
+    fetch
+  });
+
+  const ctpClient = createClient({
+    middlewares: [authMiddleWare, httpMiddleWare]
+  });
+
+  return ctpClient;
 };
 
 const getMLClient = () => {};
 
 const getMyAPIClient = () => {
+  const projectKey = process.env.ME_PROJECT_KEY;
+  const clientSecret = process.env.ME_CLIENT_SECRET;
+  const clientId = process.env.ME_CLIENT_ID;
+  const oauthHost = process.env.ME_AUTH_URL;
+  const host = process.env.ME_API_URL;
+  const username = 'bam@test.com';
+  const password = 'password';
 
+  const authMiddleWare = createAuthForPasswordFlow({
+    host: oauthHost,
+    projectKey,
+    credentials: {
+      clientId,
+      clientSecret,
+      user: {
+        username,
+        password
+      }
+    },
+    fetch
+  });
+
+  const httpMiddleWare = createHttpClient({
+    host,
+    fetch
+  });
+
+  const ctpClient = createClient({
+    middlewares: [authMiddleWare, httpMiddleWare]
+  });
+
+  return ctpClient;
 };
 
 module.exports.apiRoot = createApiBuilderFromCtpClient(getClient())
@@ -94,7 +150,11 @@ module.exports.importApiRoot = createApiBuilderFromCtpClientOnlyForImports(
   getImportClient()
 ).withProjectKeyValue({ projectKey });
 
-// module.exports.storeApiRoot = createApiBuilderFromCtpClient(getStoreClient());
+module.exports.storeApiRoot = createApiBuilderFromCtpClient(
+  getStoreClient()
+).withProjectKey({ projectKey });
 
-// module.exports.myApiRoot = createApiBuilderFromCtpClient(getMyAPIClient());
+module.exports.myApiRoot = createApiBuilderFromCtpClient(
+  getMyAPIClient()
+).withProjectKey({ projectKey });
 module.exports.projectKey = projectKey;

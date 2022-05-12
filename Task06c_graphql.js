@@ -23,3 +23,10 @@ query {
   `;
 
   // TODO: POST GraphQL query
+  apiRoot.graphql().post({
+    body: {
+      query,
+    }
+  }).execute()
+    .then(log)
+    .catch(log)
